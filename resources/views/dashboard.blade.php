@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     Accueil de l'appli
-                    <p>Bienvenue, {{ Auth::user()->name }}</p>
+                    <p>Bienvenue, {{ Auth::user()->poste }}</p>
                 </div>
             </div>
         </div>
