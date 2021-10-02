@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+    public function index()
+    {
+        $category = Category::all();
+        return view('agenda', compact('category'));
+    }
+
     public function create()
     {
-        $categories = Category::all();
-        return $categories;
+        $category = Category::all();
+        return view('agenda', compact('category'));
     }
 }

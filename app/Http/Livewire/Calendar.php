@@ -5,10 +5,13 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use App\Models\Event;
+use App\Models\Category;
 
 class Calendar extends Component
 {
     public $events = [];
+    // public $categories = [0 => "test""n => "autre test"];
+    public $categories = [];
 
     public function eventChange($event)
     {
@@ -39,5 +42,12 @@ class Calendar extends Component
     public function eventRemove($id)
     {
         Event::destroy($id);
+    }
+
+    public function functionTest()
+    {
+        $categories = Category::all();
+        $this->categories = $categories;
+        // dd($this);
     }
 }

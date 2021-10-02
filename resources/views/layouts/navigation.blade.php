@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 hidden sm:flex">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('chartjs.index')" :active="request()->routeIs('chartjs.index')">
                         {{ __('Statistiques') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+                    <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
                     </x-nav-link>
                     <livewire:search />
@@ -80,7 +80,7 @@
             <x-responsive-nav-link :href="route('chartjs.index')" :active="request()->routeIs('chartjs.index')">
                 {{ __('Statistiques') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+            <x-responsive-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                 {{ __('Agenda') }}
             </x-responsive-nav-link>
         </div>

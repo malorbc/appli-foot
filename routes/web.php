@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChartJsController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/chartjs', [ChartJsController::class, 'index'])->name('chartjs.index');
 
-Route::get('/agenda', function () {
-    return view('agenda');
-})->name('agenda');
+// Route::get('/agenda', function () {
+//     return view('agenda');
+// })->name('agenda');
+
+Route::resource('agenda', EventController::class);
 
 require __DIR__ . '/auth.php';

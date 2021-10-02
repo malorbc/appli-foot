@@ -35,6 +35,7 @@
             <main>
                 {{ $slot }}
             </main>
+            @include('layouts.tabs')
         </div>
         @livewireScripts
         @stack('scripts')

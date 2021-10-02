@@ -46,6 +46,10 @@
         }
     </style>
     <div>
+        {{-- <x-button wire:click="functionTest">Afficher les catégories</x-button>
+        @foreach ($categories as $categorie)
+            <p>{{ $categorie->name }} </p>
+        @endforeach --}}
         <div class="calendar-container p-6 bg-white border-b border-gray-200" wire:ignore>
             <div class="evts" id="events">
                 <div class="dropEvent new modal-open bg-indigo-500 text-white">Nouvel évènement</div>
@@ -118,7 +122,7 @@
                 // const id = create_UUID();
 
                 toggleModal();
-
+                getInfos();
                 let title = "test";
                 const id = create_UUID();
                 let description = "description test";
@@ -162,6 +166,10 @@
                 }
             }
         });
+
+        getInfos = ()=>{
+            getInfosFromModale();
+        }
     </script>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css' rel='stylesheet' />
     
