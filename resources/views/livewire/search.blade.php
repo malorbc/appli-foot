@@ -13,8 +13,7 @@
                 @if(count($users) > 0)
                     @foreach ($users as $index => $user)
                         <div class="px-3 py-2 {{ $index === $selectedIndex ? 'bg-indigo-100' : ''}}">
-                            <p><strong>{{$user->name}}</strong></p>
-                            <p>{{$user->email}}</p>
+                            <p wire:click="setClubToUser('{{$user->id}}')" class="cursor-pointer">{{$user->name}}</strong></p>
                         </div>
                     @endforeach
                 @else

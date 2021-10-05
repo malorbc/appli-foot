@@ -35,7 +35,18 @@ class Calendar extends Component
 
     public function render()
     {
-        $this->events = json_encode(Event::all());
+        $clubId = auth()->user()->club_id;
+
+        $events = Event::where('club_id', $clubId)->get();
+        foreach ($events as $event) {
+            if ($event->categorie_id == 1) {
+                $event->color = 'purple';
+            } else if ($event->categorie_id == 3) {
+                $event->color = '#aabb11';
+            }
+        }
+
+        $this->events = json_encode($events);
         return view('livewire.calendar');
     }
 
@@ -49,5 +60,11 @@ class Calendar extends Component
         $categories = Category::all();
         $this->categories = $categories;
         // dd($this);
+    }
+
+    public function getCategoryNameById($id)
+    {
+        $categorie = Category::find($id);
+        return $categorie->name;
     }
 }

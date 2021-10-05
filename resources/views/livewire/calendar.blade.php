@@ -2,18 +2,13 @@
     <style>
         #calendar {
             padding: 10px;
-            width:90%;
+            width:100%;
             height: 700px;
         }
 
         .calendar-container{
             display: flex;
             margin:20px;
-        }
-
-        .evts{
-            width:20%;
-            padding: 10px;
         }
 
         .evts div{
@@ -45,20 +40,13 @@
             background-color:rgba(99, 102, 241, 0.1) !important;
         }
     </style>
-    <div>
-        {{-- <x-button wire:click="functionTest">Afficher les catégories</x-button>
-        @foreach ($categories as $categorie)
-            <p>{{ $categorie->name }} </p>
-        @endforeach --}}
-        <div class="calendar-container p-6 bg-white border-b border-gray-200" wire:ignore>
-            <div class="evts" id="events">
-                <div class="dropEvent new modal-open bg-indigo-500 text-white">Nouvel évènement</div>
-                <div data-event='{"title":"Match"}' class="dropEvent bg-indigo-300 text-white">Match</div>
-                <div data-event='{"title":"Entrainement"}' class="dropEvent bg-indigo-300 text-white">Entrainement</div>
-            </div>
-            <div id='calendar'></div>
-            
-        </div>
+    <div wire:ignore>
+        <div id='calendar'></div>
+    </div>
+    <div class="modale" wire:ignore>
+        <p>modale</p>
+        <p class="titre">lalala</p>
+        <p class="categorie"></p>
     </div>
     @push('scripts')
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js'></script>
@@ -108,11 +96,6 @@
                 eventReceive: info => {receiveEvent(info)},
                 eventClick: info => {clickEvent(info)}
             }); 
-
-            const Draggable = FullCalendar.Draggable;
-            new Draggable(document.getElementById('events'), {
-                itemSelector: '.dropEvent'
-            });
             
             //on affiche le calendrier
             calendar.render();
@@ -120,9 +103,6 @@
             function addEventFromSelected(arg){
                 // const title = prompt('Titre :');
                 // const id = create_UUID();
-
-                toggleModal();
-                getInfos();
                 let title = "test";
                 const id = create_UUID();
                 let description = "description test";
@@ -137,7 +117,6 @@
                 };
 
                 calendar.addEvent(params);
-                // console.log(calendar.getEventById(id));
                 @this.eventAdd(calendar.getEventById(id));
                 calendar.unselect();
                 /*if (title) {
@@ -160,18 +139,20 @@
             }
 
             function clickEvent(arg){
-                if(confirm('supprimer ?')){
-                    arg.event.remove();
-                    @this.eventRemove(arg.event.id);
-                }
+                // if(confirm('supprimer ?')){
+                //     arg.event.remove();
+                //     @this.eventRemove(arg.event.id);
+                // }
+                document.querySelector('.titre').innerHTML = arg.event.title;
+                let categorieName = "Chargement...";
+                let categorie = @this.getCategoryNameById(arg.event.extendedProps.categorie_id);
+                categorie.then((success)=>{
+                    categorieName = success;
+                    document.querySelector('.categorie').innerHTML = categorieName;
+                })
             }
         });
-
-        getInfos = ()=>{
-            getInfosFromModale();
-        }
     </script>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.css' rel='stylesheet' />
-    
     @endpush
 </div>
