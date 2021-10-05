@@ -21,7 +21,6 @@
                     <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
                     </x-nav-link>
-                    <livewire:search />
                 </div>
             </div>
 

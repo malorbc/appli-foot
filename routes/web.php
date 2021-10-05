@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChartJsController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ClubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/chartjs', [ChartJsController::class, 'index'])->name('chartjs.index');
-
-// Route::get('/agenda', function () {
-//     return view('agenda');
-// })->name('agenda');
-
+Route::resource('clubs', ClubController::class)->except(('index'));
 Route::resource('agenda', EventController::class);
 
 require __DIR__ . '/auth.php';

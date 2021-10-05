@@ -47,7 +47,7 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="ml-3 bg-indigo-500 hover:bg-indigo-300">
                     {{ __('Connexion') }}
                 </x-button>
             </div>

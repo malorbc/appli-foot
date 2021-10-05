@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Models\Club;
 use Livewire\Component;
 
 class Search extends Component
@@ -25,9 +25,7 @@ class Search extends Component
     {
         if (strlen($this->query) > 2) {
             $words = '%' . $this->query . '%';
-            $this->users = User::where('name', 'like', $words)
-                ->orWhere('email', 'like', $words)
-                ->get();
+            $this->users = Club::where('name', 'like', $words)->get();
         }
 
         // dd($this->users);
