@@ -40,9 +40,11 @@ class Calendar extends Component
         $events = Event::where('club_id', $clubId)->get();
         foreach ($events as $event) {
             if ($event->categorie_id == 1) {
-                $event->color = 'purple';
+                $event->color = 'blue';
             } else if ($event->categorie_id == 3) {
                 $event->color = '#aabb11';
+            } else if ($event->categorie_id == 2) {
+                $event->color = "#123456";
             }
         }
 

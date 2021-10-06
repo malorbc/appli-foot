@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 23 sep. 2021 à 10:06
+-- Généré le :  mer. 06 oct. 2021 à 16:12
 -- Version du serveur :  10.1.39-MariaDB
 -- Version de PHP :  7.3.5
 
@@ -25,21 +25,54 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `category`
+-- Structure de la table `categories`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `category`
+-- Déchargement des données de la table `categories`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
+INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'Match'),
-(2, 'Entraînement');
+(2, 'Entrainement'),
+(3, 'Autre');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `clubs`
+--
+
+CREATE TABLE `clubs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `clubs`
+--
+
+INSERT INTO `clubs` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Sans club', NULL, NULL),
+(2, 'Besançon', NULL, NULL),
+(3, 'zeg', '2021-10-05 10:46:35', '2021-10-05 10:46:35'),
+(4, 'ROMAIN LE BG', '2021-10-05 10:46:54', '2021-10-05 10:46:54'),
+(5, 'a', '2021-10-05 10:56:26', '2021-10-05 10:56:26'),
+(6, 'aeg', '2021-10-05 10:58:21', '2021-10-05 10:58:21'),
+(7, 'jhk', '2021-10-05 10:59:55', '2021-10-05 10:59:55'),
+(8, 'ae', '2021-10-05 11:01:24', '2021-10-05 11:01:24'),
+(9, 'azeg', '2021-10-05 11:02:07', '2021-10-05 11:02:07'),
+(10, 'Yes', '2021-10-05 11:03:20', '2021-10-05 11:03:20'),
+(11, 'rr', '2021-10-05 11:05:09', '2021-10-05 11:05:09'),
+(12, 'Belfort', '2021-10-05 11:48:55', '2021-10-05 11:48:55'),
+(13, 'Sochaux', '2021-10-05 12:29:51', '2021-10-05 12:29:51');
 
 -- --------------------------------------------------------
 
@@ -52,24 +85,23 @@ CREATE TABLE `events` (
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `start` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `end` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `club_id` bigint(20) UNSIGNED NOT NULL DEFAULT '1',
+  `categorie_id` bigint(20) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `start`, `end`, `description`) VALUES
-('1bb1667e-fbde-40a1-a191-85e9a3a1c85c', 'test', '2021-09-23', '2021-09-24', 'description test'),
-('1c011e49-dca7-4cc3-9210-9ec19d9ae93d', 'test', '2021-10-08', '2021-10-09', 'description test'),
-('2a78b38d-47b3-436f-bb03-7447373b42f6', 'test', '2021-08-31', '2021-09-01', 'description test'),
-('31172383-3bdc-40b3-b468-c2be07c827d3', 'Match de foot', '2021-04-10T08:0000', NULL, NULL),
-('33251caf-0ec9-44ea-a8ea-64384be29243', 'test', '2021-09-09', '2021-09-10', 'description test'),
-('7fa2b3dd-3a9e-4b7b-a38b-70f30258a220', 'test', '2021-09-16', '2021-09-17', 'description test'),
-('94c79e1e-1d13-453f-be7f-6b2b0af4c723', 'Entrainement', '2021-09-08', NULL, 'Aucune description'),
-('9d4a47b6-1433-44fa-b8e0-787f106372bc', 'Match', '2021-09-08', NULL, 'Aucune description'),
-('da38e9db-29f5-4154-9ff0-a037993092a8', 'test', '2021-09-13', '2021-09-14', 'description test'),
-('ddb43611-edae-408e-8051-2bf36ac70a80', 'Match', '2021-09-07', NULL, 'Aucune description');
+INSERT INTO `events` (`id`, `title`, `start`, `end`, `description`, `club_id`, `categorie_id`) VALUES
+('0622ab67-58e2-4887-bb0a-32d981ff576d', 'aa', '2021-10-06', NULL, 'aaaaa', 1, 1),
+('1de8e3f5-6e35-4ec4-b222-98876b0dc50a', 'az', '2021-10-06', NULL, NULL, 1, 1),
+('2cb61f06-b45d-420a-be5d-8f009775e2e3', 'test', '2021-10-13', '2021-10-14', 'description test', 1, 1),
+('769363f7-e3be-4280-9b35-167a611b78f7', 'grr', '2021-10-05', NULL, 'grrrr', 13, 1),
+('836bb7f6-4322-492f-9ce3-fb09c372d741', 'test', '2021-11-03', '2021-11-04', 'description test', 1, 1),
+('877a3271-8bcb-40fa-8222-775461d33c33', 'ouii ?', '2021-10-13T10:10', NULL, 'desc', 13, 3),
+('f7b781a6-a07e-4302-aff7-f745cdba790c', 'Titre', '2021-10-06T14:00:00+02:00', '2021-10-06T16:00:00+02:00', 'Description', 13, 2);
 
 -- --------------------------------------------------------
 
@@ -104,13 +136,18 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2021_09_17_162447_create_events_table', 2),
-(6, '2021_09_20_073825_add_description_to_events', 3),
-(7, '2021_09_20_135543_create_category_table', 4);
+(44, '2014_10_12_000000_create_users_table', 1),
+(45, '2014_10_12_100000_create_password_resets_table', 1),
+(46, '2019_08_19_000000_create_failed_jobs_table', 1),
+(47, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(48, '2021_09_17_162447_create_events_table', 1),
+(49, '2021_09_20_073825_add_description_to_events', 1),
+(50, '2021_09_20_135543_create_category_table', 1),
+(51, '2021_09_23_123507_add_columns_to_users', 1),
+(52, '2021_09_23_123712_add_surname_to_users', 1),
+(53, '2021_10_05_085658_create_clubs_table', 1),
+(54, '2021_10_05_090950_add_constraint_to_users', 1),
+(55, '2021_10_05_181340_add_constraint_to_events', 2);
 
 -- --------------------------------------------------------
 
@@ -156,33 +193,45 @@ CREATE TABLE `users` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `poste` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `naissance` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `surname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `club_id` bigint(20) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Malo', 'malo@malo', NULL, '$2y$10$puojFDVF0x1dmYc.HR1em.llWyQldqw73RCjfsKuu/c.WXV7/LBx2', NULL, '2021-09-17 10:54:09', '2021-09-17 10:54:09'),
-(2, 'Malo', 'malo.robic@gmail.com', NULL, '$2y$10$vNo4FoG/kISw8V2Ps6AYl.DppznMaALQow.23v31F8HrKSBauTjla', 'b9QMuJWOYIOhFZNSJOMX3O8v1HlRC6AlSfLdc8LN18Ya9LNou75VsEpSY6pB', '2021-09-17 15:08:31', '2021-09-17 15:08:31'),
-(3, 'sdfsdfsdfsdklkk', 'ffft@gg', NULL, '$2y$10$WOID3VTA.eE4.TkyIyIAu.2FuFvL/9AA.oRlbZfNslxS850/VTkIW', NULL, '2021-09-22 06:57:01', '2021-09-22 06:57:01');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `poste`, `naissance`, `role`, `surname`, `club_id`) VALUES
+(1, 'Malo', 'mail@mail.com', NULL, '$2y$10$2zv.iV8qx9UJ71le2WQ.0uF76WbttGGm.VbXs0UR038Pw/bBIbe7S', 'VeXrSlZXeMQDenoooXPuoHw4QS5RQM6HSBdoxWwDAwIL9eUGU71Vi7Fwq2VV', '2021-10-05 07:21:07', '2021-10-05 14:33:29', '', '2000-08-28', 'staff', 'Robic', 13),
+(2, 'Autre', 'autre@joueur.mail', NULL, '$2y$10$7661CMAVbN8bOnGuX3Wo6OJ8h4AXt4IHVNGb.yjVWYL4jIqFW0e8y', NULL, '2021-10-05 14:59:14', '2021-10-05 14:59:37', 'attaquant', '1999-02-18', 'joueur', 'joueur', 13);
 
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `category`
+-- Index pour la table `categories`
 --
-ALTER TABLE `category`
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `clubs`
+--
+ALTER TABLE `clubs`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `events_club_id_foreign` (`club_id`),
+  ADD KEY `events_categorie_id_foreign` (`categorie_id`);
 
 --
 -- Index pour la table `failed_jobs`
@@ -216,17 +265,24 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_club_id_foreign` (`club_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `category`
+-- AUTO_INCREMENT pour la table `categories`
 --
-ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `clubs`
+--
+ALTER TABLE `clubs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -238,7 +294,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
@@ -250,7 +306,24 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_categorie_id_foreign` FOREIGN KEY (`categorie_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `events_club_id_foreign` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`);
+
+--
+-- Contraintes pour la table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_club_id_foreign` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

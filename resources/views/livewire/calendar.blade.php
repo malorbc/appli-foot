@@ -75,6 +75,7 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,listWeek'
                 },
+                aspectRatio:1,
                 //la langue du calendrier
                 locale: '{{ config('app.locale') }}',
                 //les evts présents sur le calendrier (récupérés depuis la classe livewire)
