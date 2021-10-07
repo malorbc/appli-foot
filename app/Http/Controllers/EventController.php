@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClubRequest;
 use App\Http\Requests\StoreEventRequest;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\EventUser;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     public function index()
     {
-
-        return view('agenda.index');
+        $event = Event::where('id', '1de8e3f5-6e35-4ec4-b222-98876b0dc50a')->get();
+        return view('agenda.index', compact('event'));
     }
 
     public function create()
@@ -67,8 +70,6 @@ class EventController extends Controller
 
         $clubId = auth()->user()->club_id;
 
-        // dd($request->description, intval($request->category), $clubId);
-
         $event = Event::create([
             'id' => gen_uuid(),
             'title' => $request->title,
@@ -80,6 +81,18 @@ class EventController extends Controller
         ]);
         $event->save();
 
+        foreach ($request->users as $user) {
+            EventUser::create([
+                'event_id' => $event->id,
+                'user_id' => $user[0]
+            ]);
+        }
         return redirect()->route('agenda.index');
+    }
+
+    public function edit(Event $event)
+    {
+        $categories = Category::all();
+        return view('agenda.edit', compact('event', 'categories'));
     }
 }

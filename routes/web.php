@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChartJsController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\StatistiqueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $club = auth()->user()->club;
+    return view('dashboard', compact('club'));
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/chartjs', [ChartJsController::class, 'index'])->name('chartjs.index');
+Route::resource('statistiques', StatistiqueController::class);
 Route::resource('clubs', ClubController::class)->except(('index'));
 Route::resource('agenda', EventController::class);
 

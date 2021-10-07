@@ -12,14 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Accueil') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('chartjs.index')" :active="request()->routeIs('chartjs.index')">
+                    <x-nav-link :href="route('statistiques.index')" :active="request()->routeIs('statistiques.index')">
                         {{ __('Statistiques') }}
                     </x-nav-link>
                     <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard')">
+                        {{ __('Vidéos') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 {{ __('Accueil') }}
             </x-responsive-nav-link>
             @endauth
-            <x-responsive-nav-link :href="route('chartjs.index')" :active="request()->routeIs('chartjs.index')">
+            <x-responsive-nav-link :href="route('statistiques.index')" :active="request()->routeIs('statistiques.index')">
                 {{ __('Statistiques') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">

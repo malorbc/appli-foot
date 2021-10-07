@@ -30,4 +30,19 @@ class ClubController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Votre post a été créé');
     }
+
+    public function edit(Club $club)
+    {
+        return view('clubs.edit', compact('club'));
+    }
+
+    public function update(StoreClubRequest $request, Club $club)
+    {
+        $arrayUpdate = [
+            'name' => $request->name
+        ];
+
+        $club->update($arrayUpdate);
+        return redirect()->route('dashboard')->with('success', 'club modifié');
+    }
 }
