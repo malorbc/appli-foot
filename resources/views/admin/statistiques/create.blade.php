@@ -10,7 +10,7 @@
                 <span class="block text-red-500">{{$error}}</span>
             @endforeach
         </div>
-        <form action="{{ route('statistiques.store') }}" method="post" enctype="multipart/form-data" class="p-5 bg-white shadow-sm rounded-lg">
+        <form action="{{ route('admin.statistiques.store') }}" method="post" enctype="multipart/form-data" class="p-5 bg-white shadow-sm rounded-lg">
             @csrf
             <x-label for="value" value="Valeur"/>
             <x-input id="value" class="block w-full" type="text" name="value" placeholder="10"/>
@@ -21,13 +21,17 @@
             <x-label for="user" value="Joueur concerné" class="mt-4"/>
             <select name="user" id="user" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full text-gray-700">
                 @foreach($users as $user)
-                <option value="{{$user->id}}">{{$user->name}} {{$user->surname}}</option>
+                    @if ($user->id == $userSelected->id)
+                        <option value="{{$user->id}}" selected>{{$user->name}} {{$user->surname}}</option>
+                    @else
+                        <option value="{{$user->id}}">{{$user->name}} {{$user->surname}}</option>
+                    @endif
                 @endforeach
             </select>
 
             <x-button class="mt-5 bg-indigo-500 hover:bg-indigo-300">Ajouter la donnée</x-button>
 
-            <a href="{{route('statistiques.index')}}">
+            <a href="{{route('admin.statistiques.index')}}">
                 <x-button class="mt-5 bg-white hover:border-indigo-300 text-indigo-500 hover:text-indigo-300 border-2 border-indigo-500" type="button">Annuler</x-button>
             </a>
         </form>

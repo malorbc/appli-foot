@@ -1,7 +1,8 @@
+<div>
 <div class="p-4 bg-white rounded-lg m-4 shadow">
     <canvas class="canvas" id="canvas-1" height="280" width="600"></canvas>
-    <div class="filtres flex w-full justify-around py-4">
-        <div class="scale-container w-1/2">
+    <div class="filtres flex-col md:flex-row flex w-full justify-around py-4">
+        <div class="scale-container w-full md:w-1/2">
             <h3 class="text-indigo-300 text-l">Choisir l'échelle d'affichage</h3>
             <div class="flex">
                 <div class="pr-4">
@@ -18,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="scale-container w-1/2">
+        <div class="scale-container w-full md:w-1/2 mt-4 md:mt-0">
             <h3 class="text-indigo-300 text-l">Choisir l'étendu d'affichage</h3>
             <div class="flex">
                 <div class="pr-4">
@@ -35,10 +36,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <a href="{{route('statistiques.create')}}" class="mt-4 inline-block">
-        <x-button class="bg-indigo-500 hover:bg-indigo-300">Ajouter une donnée</x-button>
-    </a>    
+    </div>   
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 @push('scripts')
@@ -67,17 +65,14 @@
         };
 
         //config
+        let dateInit = new Date().getWeek();
+        let startInit = dateInit[0];
+        let endInit = dateInit[1];
+
         const config = {
             type: 'bar',
             data: barChartData,
             options: {
-                elements: {
-                    rectangle: {
-                        borderWidth: 0,
-                        borderSkipped: 'end',
-                        borderRadius:1000
-                    }
-                },
                 responsive: true,
                 title: {
                     display: false,
@@ -88,13 +83,16 @@
                 },
                 scales: {
                     xAxes:[{
+                        stacked: true,
                         type:'time',
                         time:{
                             unit:'week',
                         },
+                        unitStepSize: 1,
                         ticks:{
-                            min: Date.now(),
-                            max: Date.now(+7)
+                            autoSkip:false,
+                            min: startInit,
+                            max: endInit
                         }
                     }],
                     yAxes: [{
@@ -168,4 +166,5 @@
         return [StartDate, EndDate];
     }
 </script>
+</div>
 @endpush

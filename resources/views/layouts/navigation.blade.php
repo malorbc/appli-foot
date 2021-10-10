@@ -12,9 +12,15 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(Auth::user()->role == "staff")
+                    <x-nav-link :href="route('admin.statistiques.index')" :active="request()->routeIs('admin.statistiques.index')">
+                        {{ __('Statistiques') }}
+                    </x-nav-link>
+                    @else
                     <x-nav-link :href="route('statistiques.index')" :active="request()->routeIs('statistiques.index')">
                         {{ __('Statistiques') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
                     </x-nav-link>
@@ -39,10 +45,12 @@
                             </div>
                         </button>
                     </x-slot>
-
                     <x-slot name="content">
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
+                            <x-dropdown-link :href="route('profil')">
+                                {{ __('Mon profil') }}
+                            </x-dropdown-link>
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
@@ -50,6 +58,7 @@
                                                 this.closest('form').submit();">
                                 {{ __('Déconnexion') }}
                             </x-dropdown-link>
+                            
                         </form>
                     </x-slot>
                 </x-dropdown>
