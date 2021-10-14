@@ -18,7 +18,7 @@ class CreateStatistiquesTable extends Migration
             $table->timestamps();
             $table->string('value');
             $table->string('date');
-            $table->int('type');
+            $table->int('type')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }

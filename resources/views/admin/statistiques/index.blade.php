@@ -11,7 +11,9 @@
                 <div class="w-full sm:w-1/2 md:w-1/3 lg:1/4 p-2 h-auto overflow-y-hidden">
                     <div class="bg-gray-100 shadow-sm p-2 rounded-lg h-full">
                         <div class="flex">
-                            <div class="image h-16 w-16 bg-indigo-500 rounded-lg"></div>
+                            <div class="image h-16 w-16 bg-indigo-500 rounded-lg">
+                                <img class="object-cover h-full w-full rounded-lg border-4 border-indigo-500"src="{{asset('/storage/') . '/'.$user->image}}" alt="" srcset="">
+                            </div>
                             <div class="infos ml-2">
                                 <p class="font-bold">{{$user->name}} {{$user->surname}}</p>
                                 <p class="italic leading-3">{{$user->age()}} ans</p>

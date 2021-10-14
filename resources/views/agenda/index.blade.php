@@ -4,8 +4,10 @@
             {{ __('Agenda') }}
         </h2>
     </x-slot>
-    <a href="{{route('agenda.create')}}">
-        <x-button class="bg-indigo-500 hover:bg-indigo-300 rounded-none" style="margin:10px;">Ajouter un évènement</x-button>
-    </a> 
+    @if (Auth::user()->role == "staff")
+        <a href="{{route('agenda.create')}}">
+            <x-button class="bg-indigo-500 hover:bg-indigo-300 rounded-none" style="margin:10px;">Ajouter un évènement</x-button>
+        </a>
+    @endif
   <livewire:calendar :event="$event"/>
 </x-app-layout>

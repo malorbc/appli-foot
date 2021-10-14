@@ -26,5 +26,24 @@
                 </div>
             </div>
         </div>
+        {{-- @php
+                $now = strtotime('today');
+                $diff = $now;
+                foreach ($events as $event) {
+                    $date = strtotime($event->start);
+                    $test = $date - $now;
+                    // echo "<p>".$event->title ."</p>";
+                    // echo "<p> diff :". $test ."</p>";
+
+                    if($date - $now < $diff){
+                        $latestEvent = $event;
+                    }
+                }
+            @endphp
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
+                    <p>évènement à venir : {{$latestEvent->title}}</p>
+                </div>
+            </div> --}}
     </div>
 </x-app-layout>

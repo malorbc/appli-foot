@@ -27,7 +27,8 @@ class StatistiqueController extends Controller
             'value' => $request->value,
             'date' => $request->date,
             'type' => 1,
-            'user_id' => $request->user
+            'user_id' => $request->user,
+            'type_id' => 0
         ]);
         $statistique->save();
         return redirect()->route('statistiques.index');

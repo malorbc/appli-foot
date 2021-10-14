@@ -84,7 +84,7 @@ class EventController extends Controller
         foreach ($request->users as $user) {
             EventUser::create([
                 'event_id' => $event->id,
-                'user_id' => $user[0]
+                'user_id' => $user
             ]);
         }
         return redirect()->route('agenda.index');

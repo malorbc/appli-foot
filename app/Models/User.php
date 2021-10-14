@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Event;
+use App\Models\EventUser;
 use App\Models\Club;
 use App\Models\Statistique;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -29,7 +30,8 @@ class User extends Authenticatable
         'poste',
         'naissance',
         'role',
-        'surname'
+        'surname',
+        'image'
     ];
 
     /**
@@ -59,6 +61,13 @@ class User extends Authenticatable
     public function events()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    public function latestEvent()
+    {
+        $events = EventUser::where('id_user', auth()->user()->id);
+        dd($events);
+        return $events;
     }
 
     public function age()

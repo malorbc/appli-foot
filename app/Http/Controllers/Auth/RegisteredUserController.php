@@ -23,6 +23,46 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
+    public function index()
+    {
+        return view('profil.index');
+    }
+
+    public function edit(User $user)
+    {
+        dd($user);
+        return view('profil.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        if ($request->image == null) {
+            $request->only(['name', 'naissance', 'surname']);
+        }
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'naissance' => ['required', 'string'],
+            'surname' => ['required', 'string', 'max:255'],
+            'image' => ['sometimes', 'image']
+        ]);
+
+        $args = [
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'naissance' => $request->naissance
+        ];
+
+        if ($request->image != null) {
+            $imageName = $request->image->store('users');
+            $args = array_merge($args, [
+                'image' => $imageName
+            ]);
+        }
+        $user->update($args);;
+        return redirect()->route('profil.index')->with('success', 'profil modifié');
+    }
+
     /**
      * Handle an incoming registration request.
      *
@@ -39,7 +79,10 @@ class RegisteredUserController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'string', 'max:255'],
+            'image' => ['mimes:jpeg,jpg,png']
         ]);
+
+        $imageName = $request->image->store('users');
 
         $args = [
             'name' => $request->name,
@@ -47,7 +90,9 @@ class RegisteredUserController extends Controller
             'surname' => $request->surname,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-            'naissance' => $request->naissance
+            'naissance' => $request->naissance,
+            // 'image' => $imageName
+            'image' => 'users/default.png'
         ];
 
         if ($request->role == 'joueur') {

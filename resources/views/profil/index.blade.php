@@ -8,9 +8,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex p-4">
-                <div class="img w-32 h-32 bg-indigo-500 rounded-lg shadow-sm"></div>
+                <div class="img w-32 h-32 bg-indigo-500 rounded-lg shadow-sm">
+                    <img class="object-cover h-full w-full rounded-lg border-4 border-indigo-500"src="{{asset('/storage/') . '/'.Auth::user()->image}}" alt="" srcset="">
+                </div>
                 <div class="pl-4">
-                    <a href="{{route('profil.update')}}">
+                    @php $user = Auth::user(); @endphp
+                    <p>{{$user}}</p>
+                    <a href="{{route('profil.edit',$user)}}">
                         <h3 class="text-indigo-500 font-bold text-xl">{{Auth::user()->name}} {{Auth::user()->surname}}</h3>
                     </a>
                     <p class="italic leading-3">{{Auth::user()->age()}} ans</p>

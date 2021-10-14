@@ -4,16 +4,20 @@
             {{ __('Modifier mon profil') }}
         </h2>
     </x-slot>
-
+    <p>{{$user}}</p>
     <div class="py-12">
         @php
         $user = Auth::user();
         @endphp
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex p-4">
-                <div class="img w-32 h-32 bg-indigo-500 rounded-lg shadow-sm"></div>
-                <div class="pl-4">
-                    <form action="">
+            <form action="{{route('profil.update', $user)}}" method="post" enctype="multipart/form-data">
+                @method('put')
+                @csrf
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex p-4">
+                    <div class="img w-32 h-32 bg-indigo-500 rounded-lg shadow-sm">
+                        <x-input type="file" name="image"></x-input>
+                    </div>
+                    <div class="pl-4">
                         <div class="flex">
                             <x-input id="name" name="name" value="{{$user->name}}" class="text-indigo-500 font-bold text-xl w-auto inline-block"/>
                             <x-input id="surname" name="surname" value="{{$user->surname}}" class="text-indigo-500 font-bold text-xl w-auto inline-block"/>
@@ -29,11 +33,10 @@
                             </svg></span>{{Auth::user()->uppercasePoste()}}</p>
                         @endif
                         <p>Club : {{Auth::user()->club->name}}</p>
-                        <x-input id="image" type="file" name="image"></x-input>
-                        <x-button class="bg-indigo-500">Valider</x-button>
-                    </form>
+                        <x-button class="bg-indigo-500">Valider</x-button> 
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <script>
