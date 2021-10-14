@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -17,5 +19,21 @@ class Event extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function categorie()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function formatedDate($date)
+    {
+        if (Carbon::parse($date)->isoFormat('H:mm') == "0:00") {
+            $str = Carbon::parse($date)->isoFormat('dddd D MMMM');
+        } else {
+            $str =  Carbon::parse($date)->isoFormat('dddd D MMMM H:mm');
+        }
+
+        return ucfirst($str);
     }
 }

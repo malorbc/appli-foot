@@ -1,16 +1,12 @@
 <div>
     <style>
         #calendar {
-            padding: 10px;
-            width:100%;
             height: 700px;
         }
 
-        .calendar-container{
-            display: flex;
-            margin:20px;
+        .btn-add-event{
+            /* margin:0px !important; */
         }
-
         .evts div{
             padding:10px 20px;
             border-radius:5px;
@@ -39,16 +35,61 @@
         .fc .fc-daygrid-day.fc-day-today{
             background-color:rgba(99, 102, 241, 0.1) !important;
         }
+
+        .calendar-container{
+            /* width:80rem; */
+        }
+
+        .match{
+            color:rgba(245, 158, 11, 0.5);
+        }
+
+        .entrainement{
+            color:rgba(16, 185, 129,0.5);
+        }
+
+        @media screen and (max-width:512px){
+            .fc-header-toolbar{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+        }
     </style>
     <div wire:ignore>
-        <div id='calendar'></div>
+        <div class="flex flex-col-reverse sm:flex-row-reverse mx-8 mt-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="p-4 bg-white rounded-lg w-full sm:w-3/4 mb-4 shadow">
+                <div id='calendar'></div>
+            </div>
+            <div class="legende w-full mb-4 sm:mb-0 sm:w-1/4 p-4 bg-white rounded-lg shadow mr-4" style="height:max-content">
+                @if (Auth::user()->role == "staff")
+                    <a href="{{route('agenda.create')}}">
+                        <x-button class="bg-indigo-500 hover:bg-indigo-300 rounded-none mb-4 w-full flex justify-between">Ajouter un évènement <svg xmlns="http://www.w3.org/2000/svg" class="w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                          </svg></x-button>
+                    </a>
+                @endif
+                <p class="font-bold text-indigo-500 mt-4 border-b-2">Informations supplémentaires</p>
+                <div class="labels">
+                    <div class="flex items-center mt-2">
+                        <span class="block w-10 h-4 bg-yellow-500 opacity-50 rounded-sm mr-2"></span><p>Match</p>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <span class="block w-10 h-4 bg-green-500 opacity-50 rounded-sm mr-2"></span><p>Entrainement</p>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <span class="block w-10 h-4 bg-indigo-500 opacity-50 rounded-sm mr-2"></span><p>Autre</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modale w-full h-full bg-indigo-800 fixed top-0 z-50 bg-opacity-90 flex justify-center flex-col items-center" wire:ignore style="display:none;">
         <div class="p-5 bg-white shadow-sm rounded-lg flex  flex-col w-auto sm:w-1/2">
             <div class="flex w-full justify-between items-center">
                 <h3 class="text-sm">Détails de l'évènement</h3>
                 {{-- <p>{{$event}}</p> --}}
-                <a href="{{route('agenda.edit', $event)}}" class="cursor-pointer x-close-modale"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 hover:text-indigo-300" viewBox="0 0 20 20" fill="currentColor">
+                <a href="{{route('agenda.edit', $event)}}" class="cursor-pointer x-close-modale"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 hover:text-indigo-300 hidden" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                   </svg></a>
             </div>
@@ -132,9 +173,11 @@
                 document.querySelector('.titre').innerHTML = arg.event.title;
                 let categorieName = "Chargement...";
                 let categorie = @this.getCategoryNameById(arg.event.extendedProps.categorie_id);
-                categorie.then((success)=>{
-                    categorieName = success;
+                categorie.then((data)=>{
+                    categorieName = data;
+                    console.log(categorieName.toLowerCase());
                     document.querySelector('.categorie').innerHTML = categorieName;
+                    document.querySelector('.categorie').classList = "categorie italic " + categorieName.toLowerCase();
                 });
                 document.querySelector('.description').innerHTML = arg.event.extendedProps.description;
                 document.querySelector('.modale').style.display = "flex";

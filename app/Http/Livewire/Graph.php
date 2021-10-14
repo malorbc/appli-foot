@@ -9,6 +9,7 @@ class Graph extends Component
 {
     public $type;
     public $style;
+    public $legend;
     public $canvasId;
 
     public function render()

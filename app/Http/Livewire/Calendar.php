@@ -40,11 +40,14 @@ class Calendar extends Component
         //choisir couleur de chaque evt ici
         foreach ($events as $event) {
             if ($event->categorie_id == 1) {
-                // $event->color = 'blue';
+                // Match
+                $event->color = 'rgba(245, 158, 11, 0.5)';
             } else if ($event->categorie_id == 3) {
+                // Autre
                 // $event->color = '#aabb11';
             } else if ($event->categorie_id == 2) {
-                // $event->color = "#123456";
+                // Entrainement
+                $event->color = "rgba(16, 185, 129,0.5)";
             }
         }
 

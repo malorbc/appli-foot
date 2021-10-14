@@ -6,10 +6,10 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <h3 class="text-lg text-center pb-2 font-bold">Bienvenue, {{ Auth::user()->name }} {{ Auth::user()->surname }}</h3>
+        <div class="p-4 bg-white rounded-lg m-4 shadow max-w-7xl mx-auto lg:px-8">
+            <div class="">
+                <div class="">
+                    <h3 class="text-lg text-center pb-2 font-bold">Bienvenue, {{ Auth::user()->surname }} {{ Auth::user()->name }}</h3>
                     @if(Auth::user()->club->id == 1)
                         <p class=" md:text-center">Vous n'avez pas encore de club. Créez en un ou rejoignez-en un avant de commencer à utiliser l'application.</p>
                         <div class="py-3 flex h-16 justify-around md:max-w-sm md:m-auto">
@@ -26,24 +26,46 @@
                 </div>
             </div>
         </div>
-        {{-- @php
-                $now = strtotime('today');
-                $diff = $now;
-                foreach ($events as $event) {
-                    $date = strtotime($event->start);
-                    $test = $date - $now;
-                    // echo "<p>".$event->title ."</p>";
-                    // echo "<p> diff :". $test ."</p>";
+        @php
+            $user =  Auth::user();
+            $now = strtotime('today');
+            $diff = $now;
 
-                    if($date - $now < $diff){
+            if(strlen($events) == 2){
+                $hasEvent = False;
+            }else{
+                    foreach ($events as $event) {
+                    $date = strtotime($event->start);
+                    if($date - $now < $diff && $date-$now>0){
+                        $diff = $date-$now;
                         $latestEvent = $event;
                     }
                 }
-            @endphp
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                    <p>évènement à venir : {{$latestEvent->title}}</p>
+                $hasEvent = True;
+            }                
+        @endphp
+        @if(!$hasEvent)
+            <div class="p-4 bg-white rounded-lg m-4 shadow max-w-7xl mx-auto lg:px-8">
+                <div class="">
+                    <p>Aucun évènement à venir.</p>
                 </div>
-            </div> --}}
+            </div>
+        @else
+            <div class="p-4 bg-white rounded-lg m-4 shadow max-w-7xl mx-auto lg:px-8">
+                <div class="">
+                    <h3 class="text-xl text-indigo-500 font-bold">{{$latestEvent->title}} - {{$latestEvent->categorie->name}}</h3>
+                    <p class="font-bold">{{$latestEvent->formatedDate($latestEvent->start)}}</p>
+                    <p class="text-gray-500">{{$latestEvent->description}}</p>
+                    
+                </div>
+            </div>
+        @endif
+
+        @if($user->role == "joueur")
+            @php
+            $legend = false;
+            @endphp
+            <livewire:graph :type="1" :canvasId="1" :legend='$legend'/>
+        @endif
     </div>
 </x-app-layout>

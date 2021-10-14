@@ -1,6 +1,6 @@
 <div>
-<div class="p-4 bg-white rounded-lg m-4 shadow">
-    <canvas class="canvas" id="canvas-1" height="280" width="600"></canvas>
+<div class="p-4 bg-white rounded-lg m-4 shadow max-w-7xl mx-auto lg:px-8">
+    <canvas class="canvas" id="canvas-1" height="@this(height)" width="600"></canvas>
     <div class="filtres flex-col md:flex-row flex w-full justify-around py-4">
         <div class="scale-container w-full md:w-1/2">
             <h3 class="text-indigo-300 text-l">Choisir l'échelle d'affichage</h3>
@@ -116,6 +116,12 @@
                 myChart.update();
             })
         });
+
+        let legende = document.querySelector('.filtres');
+        let isLegend = (@this.legend);
+        if(!isLegend){
+            legende.style.display = "none";
+        }
 
         let btnSpan = document.querySelectorAll("input[name='span']");
         btnSpan.forEach(el => {

@@ -13,8 +13,9 @@
                 </div>
                 <div class="pl-4">
                     @php $user = Auth::user(); @endphp
-                    <p>{{$user}}</p>
-                    <a href="{{route('profil.edit',$user)}}">
+                    {{-- <p>{{$user}}</p> --}}
+                    {{-- <a href="{{route('profil.edit',$user)}}"> --}}
+                    <a href="#">
                         <h3 class="text-indigo-500 font-bold text-xl">{{Auth::user()->name}} {{Auth::user()->surname}}</h3>
                     </a>
                     <p class="italic leading-3">{{Auth::user()->age()}} ans</p>

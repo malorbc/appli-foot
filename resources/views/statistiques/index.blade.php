@@ -7,7 +7,8 @@
     <div>
         @php
         $style = "bar";
+        $legend = true;
         @endphp
-        <livewire:graph :type="1" :style="$style" :canvasId="1"/>
+        <livewire:graph :type="1" :style="$style" :canvasId="1" :legend="$legend"/>
     </div>
 </x-app-layout>

@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
 
     public function edit(User $user)
     {
-        dd($user);
+
         return view('profil.edit', ['user' => $user]);
     }
 
@@ -82,7 +82,14 @@ class RegisteredUserController extends Controller
             'image' => ['mimes:jpeg,jpg,png']
         ]);
 
-        $imageName = $request->image->store('users');
+        // dd($request->image);
+
+        if ($request->image == null) {
+            $imageName = "users/default.png";
+        } else {
+            $imageName = $request->image->store('users');
+        }
+
 
         $args = [
             'name' => $request->name,
@@ -91,8 +98,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'naissance' => $request->naissance,
-            // 'image' => $imageName
-            'image' => 'users/default.png'
+            'image' => $imageName
         ];
 
         if ($request->role == 'joueur') {

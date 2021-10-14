@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Appli foot') }}</title>
+        {{-- <title>Foot</title> --}}
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -35,7 +36,7 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="mb-16 sm:mb-0">
                 {{ $slot }}
             </main>
             @include('layouts.tabs')
