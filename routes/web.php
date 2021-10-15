@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('statistiques', StatistiqueController::class);
     Route::resource('clubs', ClubController::class)->except(('index'));
     Route::resource('agenda', EventController::class);
+    Route::get('/dashboard/accept/{id}', 'App\Http\Controllers\DashboardController@accept')->name('dashboard.accept');
     Route::resource('profil', RegisteredUserController::class, [
         'only' => ['index', 'edit', 'store', 'update']
     ]);

@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\EventUser;
 use App\Models\Club;
 use App\Models\Statistique;
+use App\Models\ClubRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,7 +32,8 @@ class User extends Authenticatable
         'naissance',
         'role',
         'surname',
-        'image'
+        'image',
+        'club_id'
     ];
 
     /**
@@ -91,6 +93,17 @@ class User extends Authenticatable
         } else {
             return $stats;
         }
+    }
+
+    public function clubrequests()
+    {
+        return $this->hasMany(ClubRequest::class)->latest()->limit(1);
+    }
+
+    public function playerRequests($clubId)
+    {
+        $playerRequests = ClubRequest::where('club_id', $clubId)->where('status', 0)->get();
+        return $playerRequests;
     }
 
     public function getDate($date)

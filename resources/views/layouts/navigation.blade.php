@@ -1,8 +1,8 @@
-<nav x-data="{ open: false }" class="bg-indigo-600">
+<nav x-data="{ open: false }" class="bg-indigo-600 z-30 relative">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto lg:px-8">
         <div class="">
-            <div class="flex justify-between h-16 px-4 sm:px-0">
+            <div class="flex justify-between h-16 mx-4 sm:mx-4 md:mx-2 lg:mx-0">
                 <div class="flex">
                     <!-- Logo -->
                     <div class="flex-shrink-0 flex items-center">
@@ -37,7 +37,7 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="flex items-center text-sm font-medium text-white hover:text-indigo-100 hover:border-indigo-100 focus:outline-none focus:text-white focus:border-indigo-100 transition duration-150 ease-in-out">
-                                <div>{{ Auth::user()->name }}</div>
+                                <div>{{ Auth::user()->surname }}</div>
 
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
