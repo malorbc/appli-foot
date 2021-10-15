@@ -26,10 +26,12 @@ class DashboardController extends Controller
             'club_id' => $clubId
         ];
 
-        $user = User::findOrFail($userId);
-        $user->update($argsUpdateUser);
-        $user->save();
-        $request->update($args);
+        if ($clubId == auth()->user()->club_id) {
+            $user = User::findOrFail($userId);
+            $user->update($argsUpdateUser);
+            $user->save();
+            $request->update($args);
+        }
         return redirect()->route('dashboard');
     }
 }
