@@ -10,7 +10,7 @@
                 <span class="block text-red-500">{{$error}}</span>
             @endforeach
         </div>
-        <form action="{{ route('clubs.store') }}" method="post" enctype="multipart/form-data" class="p-5 bg-white shadow-sm rounded-lg">
+        <form action="{{ route('admin.clubs.store') }}" method="post" enctype="multipart/form-data" class="p-5 bg-white shadow-sm rounded-lg">
             @csrf
             <x-label for="name" value="Nom du club"/>
             <x-input id="name" class="block w-full" type="text" name="name" placeholder="Exemple : Besançon"/>

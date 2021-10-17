@@ -63,7 +63,7 @@
             </div>
             <div class="legende w-full mb-4 sm:mb-0 sm:w-1/4 p-4 bg-white rounded-lg shadow mr-4" style="height:max-content">
                 @if (Auth::user()->role == "staff")
-                    <a href="{{route('agenda.create')}}">
+                    <a href="{{route('admin.agenda.create')}}">
                         <x-button class="bg-indigo-500 hover:bg-indigo-300 rounded-none mb-4 w-full flex justify-between">Ajouter un évènement <svg xmlns="http://www.w3.org/2000/svg" class="w-6 ml-1" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                           </svg></x-button>
@@ -128,6 +128,17 @@
 
             // console.log(@this.event);
 
+            let isAdmin = (@this.admin);
+            let isEditable = false;
+            console.log(isAdmin);
+            if(isAdmin == 1){
+                isEditable = true
+            }else{
+                isEditable = false
+            }
+
+            console.log(isEditable);
+
             //creation d'un nouveau calendrier 
             const Calendar = FullCalendar.Calendar;
             const calendarEl = document.getElementById('calendar');
@@ -146,7 +157,7 @@
                 eventColor: '#a5b4fc',
 
                 //on peut modifier le calendrier
-                editable: true,   
+                editable: isEditable,   
                 
                 //fonction appelée lors du resize
                 eventResize: info => @this.eventChange(info.event),

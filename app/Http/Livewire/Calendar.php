@@ -10,6 +10,8 @@ use App\Models\Category;
 class Calendar extends Component
 {
     public $events = [];
+    public $event;
+    public $admin;
     // public $categories = [0 => "test""n => "autre test"];
     public $categories = [];
 

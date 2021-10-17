@@ -15,7 +15,7 @@
                                 <img class="object-cover h-full w-full rounded-lg border-4 border-indigo-500"src="{{asset('/storage/') . '/'.$user->image}}" alt="" srcset="">
                             </div>
                             <div class="infos ml-2">
-                                <p class="font-bold">{{$user->name}} {{$user->surname}}</p>
+                                <p class="font-bold">{{$user->surname}} {{$user->name}}</p>
                                 <p class="italic leading-3">{{$user->age()}} ans</p>
                                 <p class="text-indigo-500 pt-1">{{$user->uppercasePoste()}}</p>
                             </div>

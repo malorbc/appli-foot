@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-indigo-600 z-30 relative">
+<nav x-data="{ open: false }" class="bg-gradient-to-r from-indigo-600 to-green-500 z-30 relative">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto lg:px-8">
         <div class="">
@@ -17,14 +17,17 @@
                         <x-nav-link :href="route('admin.statistiques.index')" :active="request()->routeIs('admin.statistiques.index')">
                             {{ __('Statistiques') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.agenda.index')" :active="request()->routeIs('admin.agenda.index')">
+                            {{ __('Agenda') }}
+                        </x-nav-link>
                         @else
                         <x-nav-link :href="route('statistiques.index')" :active="request()->routeIs('statistiques.index')">
                             {{ __('Statistiques') }}
                         </x-nav-link>
-                        @endif
                         <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                             {{ __('Agenda') }}
                         </x-nav-link>
+                        @endif
                         <x-nav-link :href="route('dashboard')">
                             {{ __('Vidéos') }}
                         </x-nav-link>

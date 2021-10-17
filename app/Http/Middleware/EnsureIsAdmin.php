@@ -19,7 +19,7 @@ class EnsureIsAdmin
         if ($request->user()->role == "staff") {
             return $next($request);
         } else {
-            abort(403);
+            abort(403, 'Accès interdit');
         }
     }
 }

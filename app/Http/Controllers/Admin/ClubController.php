@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Club;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClubRequest;
+use App\Models\Club;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class ClubController extends Controller
 {
     public function create()
     {
-        return view('clubs.create');
+        return view('admin.clubs.create');
     }
 
     public function store(StoreClubRequest $request)
@@ -26,7 +27,6 @@ class ClubController extends Controller
 
         $currentUser->club_id = $club->id;
         $currentUser->save();
-        // dd($currentUser->club_id);
 
         return redirect()->route('dashboard')->with('success', 'Votre post a été créé');
     }
@@ -34,7 +34,7 @@ class ClubController extends Controller
     public function edit(Club $club)
     {
         if ($club->id == auth()->user()->club_id) {
-            return view('clubs.edit', compact('club'));
+            return view('admin.clubs.edit', compact('club'));
         } else {
             abort(403, 'Accès interdit');
         }

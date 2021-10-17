@@ -9,7 +9,7 @@
           <span class="block text-red-500">{{$error}}</span>
       @endforeach
     </div>
-    <form action="{{ route('agenda.store') }}" method="post" enctype="multipart/form-data" class="flex flex-col" x-data="{open : false}">
+    <form action="{{ route('admin.agenda.store') }}" method="post" enctype="multipart/form-data" class="flex flex-col" x-data="{open : false}">
         @csrf
         <div class="flex sm:flex-row flex-col">
           <div class="bg-white shadow-sm rounded-lg p-4 m-4 sm:w-1/2 w-auto">
@@ -89,7 +89,7 @@
         </div>
         <!--Boutons -->
         <div class="flex justify-end pt-2 mr-4 mb-24 sm:mb-0">
-            <a href="{{route('agenda.index')}}">
+            <a href="{{route('admin.agenda.index')}}">
                 <x-button type="button" class="bg-indigo-200 hover:bg-indigo-100 mr-3 px-4 normal-case">Annuler</x-button>
             </a>
             <x-button class="bg-indigo-500 hover:bg-indigo-400 px-4 normal-case" id="#buttonAddEvent">Ajouter</x-button>
