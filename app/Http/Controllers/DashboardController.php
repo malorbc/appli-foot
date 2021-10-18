@@ -31,7 +31,22 @@ class DashboardController extends Controller
             $user->update($argsUpdateUser);
             $user->save();
             $request->update($args);
+            return redirect()->route('dashboard');
+        } else {
+            abort(403, 'Accès interdit');
         }
-        return redirect()->route('dashboard');
+    }
+
+    public function deny($id)
+    {
+        $request = ClubRequest::findOrFail($id);
+        $clubId = $request->club_id;
+
+        if ($clubId == auth()->user()->club_id) {
+            ClubRequest::destroy($id);
+            return redirect()->route('dashboard');
+        } else {
+            abort(403, 'Accès interdit');
+        }
     }
 }

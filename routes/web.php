@@ -32,12 +32,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('statistiques', StatistiqueController::class);
-    Route::resource('agenda', EventController::class);
-    Route::get('/dashboard/accept/{id}', 'App\Http\Controllers\DashboardController@accept')->name('dashboard.accept');
+
     Route::resource('profil', RegisteredUserController::class, [
         'only' => ['index', 'edit', 'store', 'update']
     ]);
+
+    Route::middleware(['verifiedClub'])->group(function () {
+        Route::resource('statistiques', StatistiqueController::class);
+        Route::resource('agenda', EventController::class);
+        Route::get('/dashboard/accept/{id}', 'App\Http\Controllers\DashboardController@accept')->name('dashboard.accept');
+        Route::get('/dashboard/deny/{id}', 'App\Http\Controllers\DashboardController@deny')->name('dashboard.deny');
+    });
 
     Route::middleware(['admin'])->name('admin.')->prefix('admin')->group(function () {
         Route::resource('statistiques', AdminStatistiqueController::class);
