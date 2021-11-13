@@ -5,6 +5,6 @@
         </h2>
     </x-slot>
     <div>
-        <livewire:calendar :event="$event" :admin='0'/>
+        <livewire:calendar :event="$event" :admin='1'/>
     </div>
 </x-app-layout>

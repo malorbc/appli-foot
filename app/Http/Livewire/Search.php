@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Club;
 use App\Models\User;
+use App\Models\ClubRequest;
 use Livewire\Component;
 
 class Search extends Component
@@ -35,10 +36,14 @@ class Search extends Component
     public function setClubToUser($idClub)
     {
         $userId = auth()->user()->id;
-        $currentUser = User::findOrFail($userId);
-        $currentUser->update(['club_id', $idClub]);
-        $currentUser->club_id = $idClub;
-        $currentUser->save();
+        $args = [
+            "user_id" => $userId,
+            "club_id" => $idClub,
+            "status" => 0,
+        ];
+        ClubRequest::where('user_id', $userId)->delete();
+        $clubrequest = ClubRequest::create($args);
+        $clubrequest->save();
         return redirect()->route('dashboard')->with('success', 'Vous êtes enregistrés dans le club');
     }
 

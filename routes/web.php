@@ -6,6 +6,13 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\VideoController;
 
+use App\Http\Controllers\StatistiqueController;
+use App\Models\User;
+use App\Http\Controllers\Admin\StatistiqueController as AdminStatistiqueController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\ClubController as AdminClubController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,12 +29,32 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $club = auth()->user()->club;
+    $events = auth()->user()->events;
+    return view('dashboard', compact('club', 'events'));
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/chartjs', [ChartJsController::class, 'index'])->name('chartjs.index');
-Route::resource('clubs', ClubController::class)->except(('index'));
-Route::resource('agenda', EventController::class);
-Route::resource('videos', VideoController::class);
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('profil', RegisteredUserController::class, [
+        'only' => ['index', 'edit', 'store', 'update']
+    ]);
+
+    Route::middleware(['verifiedClub'])->group(function () {
+        Route::resource('statistiques', StatistiqueController::class);
+        Route::resource('agenda', EventController::class);
+        Route::resource('videos', VideoController::class);
+        Route::get('/dashboard/accept/{id}', 'App\Http\Controllers\DashboardController@accept')->name('dashboard.accept');
+        Route::get('/dashboard/deny/{id}', 'App\Http\Controllers\DashboardController@deny')->name('dashboard.deny');
+    });
+
+    Route::middleware(['admin'])->name('admin.')->prefix('admin')->group(function () {
+        Route::resource('statistiques', AdminStatistiqueController::class);
+        Route::resource('agenda', AdminEventController::class);
+        Route::resource('clubs', AdminClubController::class)->except(('index'));
+        Route::get('statistiques/create/{id}', 'App\Http\Controllers\Admin\StatistiqueController@create')->name('statistiques.create.user');
+    });
+});
+
 
 require __DIR__ . '/auth.php';

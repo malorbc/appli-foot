@@ -10,6 +10,8 @@ use App\Models\Category;
 class Calendar extends Component
 {
     public $events = [];
+    public $event;
+    public $admin;
     // public $categories = [0 => "test""n => "autre test"];
     public $categories = [];
 
@@ -35,20 +37,24 @@ class Calendar extends Component
 
     public function render()
     {
-        $clubId = auth()->user()->club_id;
+        $events = auth()->user()->events;
 
-        $events = Event::where('club_id', $clubId)->get();
+        //choisir couleur de chaque evt ici
         foreach ($events as $event) {
             if ($event->categorie_id == 1) {
-                $event->color = 'blue';
+                // Match
+                $event->color = 'rgba(245, 158, 11, 0.5)';
             } else if ($event->categorie_id == 3) {
-                $event->color = '#aabb11';
+                // Autre
+                // $event->color = '#aabb11';
             } else if ($event->categorie_id == 2) {
-                $event->color = "#123456";
+                // Entrainement
+                $event->color = "rgba(16, 185, 129,0.5)";
             }
         }
 
         $this->events = json_encode($events);
+        $this->event = Event::find('0622ab67-58e2-4887-bb0a-32d981ff576d');
         return view('livewire.calendar');
     }
 
@@ -68,5 +74,17 @@ class Calendar extends Component
     {
         $categorie = Category::find($id);
         return $categorie->name;
+    }
+
+    public function getUserFromEvent($id)
+    {
+        //trouver l'event qui correspond a l'id cliquée
+        $event = Event::find($id);
+
+        //trouver tous les users qui appartiennent à cet event
+        $users = $event->users;
+
+        //json_encode pour envoyer le tableau d'user au front
+        return json_encode($users);
     }
 }
