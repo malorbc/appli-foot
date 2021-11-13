@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChartJsController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,6 @@ Route::get('/dashboard', function () {
 Route::get('/chartjs', [ChartJsController::class, 'index'])->name('chartjs.index');
 Route::resource('clubs', ClubController::class)->except(('index'));
 Route::resource('agenda', EventController::class);
+Route::resource('videos', VideoController::class);
 
 require __DIR__ . '/auth.php';
