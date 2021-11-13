@@ -10,7 +10,6 @@
                             <x-application-logo class="block h-6 w-auto fill-current text-white transition duration-500 ease-in-out transform hover:scale-110" />
                         </a>
                     </div>
-
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         @if(Auth::user()->role == "staff")
@@ -28,7 +27,7 @@
                             {{ __('Agenda') }}
                         </x-nav-link>
                         @endif
-                        <x-nav-link :href="route('dashboard')">
+                        <x-nav-link :href="route('videos.index')" :active="request()->routeIs('videos.index')">
                             {{ __('Vidéos') }}
                         </x-nav-link>
                     </div>

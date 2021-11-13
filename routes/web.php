@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChartJsController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ClubController;
+use App\Http\Controllers\VideoController;
+
 use App\Http\Controllers\StatistiqueController;
 use App\Models\User;
 use App\Http\Controllers\Admin\StatistiqueController as AdminStatistiqueController;
@@ -40,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['verifiedClub'])->group(function () {
         Route::resource('statistiques', StatistiqueController::class);
         Route::resource('agenda', EventController::class);
+        Route::resource('videos', VideoController::class);
         Route::get('/dashboard/accept/{id}', 'App\Http\Controllers\DashboardController@accept')->name('dashboard.accept');
         Route::get('/dashboard/deny/{id}', 'App\Http\Controllers\DashboardController@deny')->name('dashboard.deny');
     });
@@ -51,7 +55,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('statistiques/create/{id}', 'App\Http\Controllers\Admin\StatistiqueController@create')->name('statistiques.create.user');
     });
 });
-
 
 
 require __DIR__ . '/auth.php';

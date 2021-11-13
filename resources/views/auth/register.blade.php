@@ -76,6 +76,7 @@
                     <x-label for="poste" :value="__('Votre poste dans l\'équipe :')"/>
                     <select name="poste" id="poste" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full text-gray-700">
                         <option value="attaquant">Attaquant</option>
+                        <option value="milieu">Milieu</option>
                         <option value="gardien">Gardien</option>
                         <option value="defenseur">Défenseur</option>
                     </select>
