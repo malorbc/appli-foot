@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use App\Models\Event;
+use App\Models\EventUser;
 use App\Models\Category;
 
 class Calendar extends Component
@@ -83,8 +84,39 @@ class Calendar extends Component
 
         //trouver tous les users qui appartiennent à cet event
         $users = $event->users;
+        $tabParticipation = [];
+
+        foreach ($users as $user) {
+            $userParticipation = EventUser::where('event_id', $id)->where('user_id', $user->id)->first();
+            // $tabParticipation = array_push($tabParticipation, $userParticipation->participation);
+            $tabParticipation = [0];
+        }
 
         //json_encode pour envoyer le tableau d'user au front
         return json_encode($users);
+    }
+
+    public function getParticipationFromEvent($id)
+    {
+        //trouver l'event qui correspond a l'id cliquée
+        $event = Event::find($id);
+
+        //trouver tous les users qui appartiennent à cet event
+        $users = $event->users;
+        $tabParticipation = [];
+
+        foreach ($users as $user) {
+            $userParticipation = EventUser::where('event_id', $id)->where('user_id', $user->id)->first();
+            // $tabParticipation = array_push($tabParticipation, $userParticipation->participation);
+            $tabParticipation = [0];
+        }
+
+        return json_encode($tabParticipation);
+    }
+
+    public function showEvent($eventId)
+    {
+        // dd($eventId);
+        return redirect()->route('agenda.show', $eventId);
     }
 }
