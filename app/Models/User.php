@@ -65,6 +65,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class);
     }
 
+    public function participation($eventId, $userId)
+    {
+        $participation = EventUser::where('user_id', $userId)->where('event_id', $eventId)->first();
+        return $participation;
+    }
+
     public function latestEvent()
     {
         $events = EventUser::where('id_user', auth()->user()->id);

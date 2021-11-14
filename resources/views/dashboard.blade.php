@@ -72,13 +72,14 @@
                             @php $joueur = $playerRequest->user @endphp
                             <div class="w-full md:w-1/2 h-auto overflow-y-hidden">
                                 <div class="bg-gray-100 shadow-sm p-2 rounded-lg h-full">
+                                    <p class="italic mb-2 border-b-2 pb-2 border-indigo-500 border-opacity-30 text-gray-500">Demande envoyée le {{$playerRequest->timestamp()}}</p>
                                     <div class="flex items-center justify-between">
                                         <div class="flex flex-row">
                                             <div class="image h-16 w-16 bg-indigo-500 rounded-lg">
                                                 <img class="object-cover h-full w-full rounded-lg border-4 border-indigo-500"src="{{asset('/storage/') . '/'.$joueur->image}}" alt="" srcset="">
                                             </div>
                                             <div class="infos ml-2">
-                                                <p class="font-bold">{{$joueur->name}} {{$joueur->surname}}</p>
+                                                <p class="font-bold">{{$joueur->surname}} {{$joueur->name}}</p>
                                                 <p class="italic leading-3">{{$joueur->age()}} ans</p>
                                                 <p class="text-indigo-500 pt-1">{{$joueur->uppercasePoste()}}</p>
                                             </div>
@@ -135,7 +136,16 @@
                     <h3 class="text-xl text-indigo-500 font-bold">{{$latestEvent->title}} - {{$latestEvent->categorie->name}}</h3>
                     <p class="font-bold">{{$latestEvent->formatedDate($latestEvent->start)}}</p>
                     <p class="text-gray-500">{{$latestEvent->description}}</p>
-                    
+                    @php $participation = $latestEvent->participation($latestEvent->id)->participation; @endphp
+                    @if($participation == "0")
+                        <a href="{{route('dashboard.confirm', $latestEvent->id)}}">
+                            <x-button class="bg-indigo-500 mt-4 hover:bg-indigo-400">Confirmer ma participation</x-button>
+                        </a>
+                    @elseif($participation == "1")
+                        <x-button class="bg-green-300 mt-4">Vous participez à cet évènement</x-button>
+                    @else
+                        <x-button class="bg-yellow-500 mt-4">Participation inconnue</x-button>
+                    @endif
                 </div>
             </div>
         @endif

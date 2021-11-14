@@ -181,6 +181,9 @@
             }
 
             function clickEvent(arg){
+
+                @this.showEvent(arg.event.id);
+                
                 document.querySelector('.titre').innerHTML = arg.event.title;
                 let categorieName = "Chargement...";
                 let categorie = @this.getCategoryNameById(arg.event.extendedProps.categorie_id);
@@ -204,6 +207,11 @@
                         document.querySelector('.users-container').innerHTML += "<li>"+user.name+" "+user.surname+"</li>";
                     });
                 });
+
+                let userParticipation = @this.getParticipationFromEvent(arg.event.id);
+                userParticipation.then((data)=>{
+                    data = JSON.parse(data);
+                })
             }
 
             document.querySelector('.modale-delete').addEventListener('click',()=>{

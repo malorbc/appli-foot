@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\EventUser;
 use Carbon\Carbon;
 
 class Event extends Model
@@ -35,5 +36,12 @@ class Event extends Model
         }
 
         return ucfirst($str);
+    }
+
+    public function participation($eventId)
+    {
+        $userId = auth()->user()->id;
+        $event = EventUser::where('event_id', $eventId)->where('user_id', $userId)->first();
+        return $event;
     }
 }
