@@ -74,7 +74,6 @@ class User extends Authenticatable
     public function latestEvent()
     {
         $events = EventUser::where('id_user', auth()->user()->id);
-        dd($events);
         return $events;
     }
 

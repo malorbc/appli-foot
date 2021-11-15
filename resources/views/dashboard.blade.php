@@ -114,13 +114,15 @@
             if(strlen($events) == 2){
                 $hasEvent = False;
             }else{
-                    foreach ($events as $event) {
+                foreach ($events as $event) {
                     $date = strtotime($event->start);
+
                     if($date - $now < $diff && $date-$now>0){
                         $diff = $date-$now;
                         $latestEvent = $event;
                     }
                 }
+                
                 $hasEvent = True;
             }                
         @endphp

@@ -17,6 +17,8 @@ class ClubController extends Controller
 
     public function store(StoreClubRequest $request)
     {
+
+
         $club = Club::create([
             'name' => $request->name
         ]);
