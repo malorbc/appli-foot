@@ -29,7 +29,7 @@
             <p class=" md:text-center">Vous n'avez pas encore de club. Rejoignez-en un avant de commencer à utiliser l'application.</p>
             <div class="py-3 flex h-16 justify-around md:max-w-sm md:m-auto">
                 @if($user->role == "staff")
-                <a href="{{route('clubs.create')}}" class="block h-full pr-1">
+                <a href="{{route('admin.clubs.create')}}" class="block h-full pr-1">
                     <x-button class="bg-indigo-500 hover:bg-indigo-300 border-2 h-full" >Créer un club</x-button>
                 </a>
                 @endif
