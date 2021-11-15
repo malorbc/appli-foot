@@ -47,7 +47,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard/accept/{id}', 'App\Http\Controllers\DashboardController@accept')->name('dashboard.accept');
         Route::get('/dashboard/deny/{id}', 'App\Http\Controllers\DashboardController@deny')->name('dashboard.deny');
         Route::get('/dashboard/confirm/{id}', 'App\Http\Controllers\EventController@confirm')->name('dashboard.confirm');
-        Route::get('/agenda/show/test/{id}/{status}', 'App\Http\Controllers\EventController@yes')->name('agenda.yes');
     });
 
     Route::middleware(['admin'])->name('admin.')->prefix('admin')->group(function () {
@@ -55,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('agenda', AdminEventController::class);
         Route::resource('clubs', AdminClubController::class)->except(('index'));
         Route::get('statistiques/create/{id}', 'App\Http\Controllers\Admin\StatistiqueController@create')->name('statistiques.create.user');
+        Route::get('agenda/{id}/{user}/{status}', 'App\Http\Controllers\Admin\EventController@confirm')->name('agenda.confirm');
     });
 });
 

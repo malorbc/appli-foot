@@ -100,7 +100,7 @@ class EventController extends Controller
     {
 
         $userId = auth()->user()->id;
-        $event = EventUser::where('event_id', $eventId)->where('user_id',$userId)->limit(1);
+        $event = EventUser::where('event_id', $eventId)->where('user_id', $userId)->limit(1);
         $args = [
             "event_id" => $eventId,
             "user_id" => $userId,
@@ -119,9 +119,5 @@ class EventController extends Controller
     public function users()
     {
         return $this->hasMany(User::class);
-    }
-
-    public function yes($status, $id){
-        dd($status, $id);
     }
 }

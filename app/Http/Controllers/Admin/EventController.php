@@ -93,4 +93,25 @@ class EventController extends Controller
         $categories = Category::all();
         return view('admin.agenda.edit', compact('event', 'categories'));
     }
+
+    public function confirm($eventId, $userId, $participation)
+    {
+        $connectedUser = auth()->user();
+        $requestedUser = User::findOrFail($userId);
+
+        // verification de sécurité
+        if ($connectedUser->club_id == $requestedUser->club_id) {
+            $event = EventUser::where('user_id', $userId)->where('event_id', $eventId)->first();
+            $args = [
+                "event_id" => $eventId,
+                "user_id" => $userId,
+                "participation" => $participation
+            ];
+
+            $event->update($args);
+            return redirect()->route('agenda.show', $eventId);
+        } else {
+            abort(403);
+        }
+    }
 }
