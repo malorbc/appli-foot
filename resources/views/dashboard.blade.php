@@ -117,14 +117,15 @@
                 foreach ($events as $event) {
                     $date = strtotime($event->start);
 
+                    $hasEvent = False;
+
                     if($date - $now < $diff && $date-$now>0){
                         $diff = $date-$now;
                         $latestEvent = $event;
+                        $hasEvent = True;
                     }
                 }
-                
-                $hasEvent = True;
-            }                
+            }
         @endphp
         @if(!$hasEvent)
             <div class="p-4 bg-white rounded-lg m-4 shadow max-w-7xl lg:mx-auto mx-4 lg:px-8">
@@ -156,7 +157,9 @@
             @php
             $legend = false;
             @endphp
-            <livewire:graph :type="1" :canvasId="1" :legend='$legend'/>
+            <div class="px-4">
+                <livewire:graph :type="1" :canvasId="1" :legend='$legend'/>
+            </div>
         @endif
     </div>
     @endif

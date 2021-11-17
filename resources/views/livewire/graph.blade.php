@@ -45,6 +45,10 @@
     document.addEventListener('livewire:load', function(){
         //setup
         let rawData = JSON.parse(@this.stats);
+
+        let testData = @this.tabTest;
+        console.log(testData);
+        console.log(rawData);
         let values = [];
         rawData.forEach(data => {
             let date = new Date(data.date);
