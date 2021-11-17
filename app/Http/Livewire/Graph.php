@@ -40,7 +40,7 @@ class Graph extends Component
         foreach ($stats as $stat) {
             array_push($tabTest, $stat);
         }
-        dd($tabTest);
+        // dd($tabTest);
         // usort($tabStats, function ($obj_a, $obj_b) {
         //     if (
         //         $obj_a->date == $obj_b->date
