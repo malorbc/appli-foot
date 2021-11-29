@@ -45,7 +45,7 @@ class StatistiqueController extends Controller
         $statistique = Statistique::create([
             'value' => $request->value,
             'date' => $request->date,
-            'type' => 1,
+            'type' => $request->type,
             'user_id' => $request->user
         ]);
         $statistique->save();

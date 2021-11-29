@@ -62,7 +62,7 @@
         let barChartData = {
             // labels: labels,
             datasets: [{
-                label: 'minutes jouées',
+                label: 'Minutes jouées',
                 backgroundColor: "#a5b4fc",
                 data: values
             }]
@@ -80,10 +80,10 @@
                 responsive: true,
                 title: {
                     display: false,
-                    text: 'Informations sur le joueur'
+                    text: 'Minutes jouées'
                 },
                 legend:{
-                    display:false
+                    display:true
                 },
                 scales: {
                     xAxes:[{

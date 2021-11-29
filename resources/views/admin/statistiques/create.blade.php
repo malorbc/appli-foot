@@ -18,6 +18,12 @@
             <x-label for="date" value="Date" class="mt-4"/>
             <x-input id="date" class="block w-full" type="date" name="date" placeholder="10"/>
 
+            <x-label for="type" value="Type de donnée" class="mt-4"/>
+            <select name="type" id="" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full text-gray-700">
+                <option value="1">Minutes jouées</option>
+                <option value="2">Poids du joueur</option>
+            </select>
+
             <x-label for="user" value="Joueur concerné" class="mt-4"/>
             <select name="user" id="user" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full text-gray-700">
                 @foreach($users as $user)
