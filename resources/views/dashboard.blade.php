@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-center text-gray-800 leading-tight">
-            {{ __('Accueil') }}
+            {{ __('Résumé de votre activité') }}
         </h2>
     </x-slot>
     @php $user = Auth::user(); @endphp
@@ -60,6 +60,15 @@
                         @else
                         <p>Votre club :<span class="pl-2 font-bold hover:text-indigo-500">{{$user->club->name}} </span></p>
                         @endif
+
+                        @if($user->role == "staff")
+                        <p>Vous êtes un <span class="font-bold hover:text-indigo-500">membre du staff</span></p>
+                        @else
+                        <p>Vous êtes un <span class="font-bold hover:text-indigo-500">joueur</span></p>
+                        <p>Votre poste :<span class="pl-2 font-bold hover:text-indigo-500">{{$user->poste}}</span></p>
+                        @endif  
+
+
                     @endif
                     @if($user->role == "staff")
                         @php
